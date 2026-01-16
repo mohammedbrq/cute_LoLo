@@ -5,24 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello Kitty Love</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="./css/style.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="main-container">
-        <div class="kitty-container">
-            <img src="{{ url_for('static', filename='images/cat.png') }}" alt="Cute Kitty" class="kitty-img">
-        </div>
-
-        <div id="content-area" class="content-area">
-            <!-- This area will be populated by JS -->
-        </div>
+<div class="main-container">
+    <div class="kitty-container">
+        <img src="./images/cat.png" alt="Cute Kitty" class="kitty-img">
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div id="content-area" class="content-area">
+        <!-- This area will be populated by JS -->
+    </div>
+</div>
+
+<script src="./js/script.js"></script>
+
 </body>
+
 
 </html>
