@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update image
             const kittyImg = document.querySelector('.kitty-img');
             if (kittyImg && step.image) {
-                kittyImg.src = `static/images/${step.image}`;
+                // ----------- تصحيح المسار هنا -----------
+                kittyImg.src = `images/${step.image}`;
             }
 
             // First load
@@ -144,7 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Update image source and fade in
                 if (kittyImg && step.image) {
-                    kittyImg.src = `static/images/${step.image}`;
+                    // ----------- تصحيح المسار هنا -----------
+                    kittyImg.src = `images/${step.image}`;
+                    
                     // Wait a tiny bit or for load to fade back in
                     kittyImg.onload = () => {
                         kittyImg.classList.remove('fade-out');
@@ -198,8 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const phraseIndex = Math.min(noClickCount - 1, phrases.length - 1);
         if (noBtn) {
             noBtn.textContent = phrases[phraseIndex];
-            // Randomly move the no button to make it harder to click? (User didn't ask, but common in this meme)
-            // User only asked "Forced to pick yes", growing Yes button is the main mech.
         }
     }
 
@@ -239,7 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start
     const kittyImg = document.querySelector('.kitty-img');
     if (kittyImg && steps[0].image) {
-        kittyImg.src = `static/images/${steps[0].image}`;
+        // ----------- تصحيح المسار هنا أيضاً -----------
+        kittyImg.src = `images/${steps[0].image}`;
     }
     renderStep(0);
 });
