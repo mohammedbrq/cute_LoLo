@@ -74,6 +74,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 wrapper.appendChild(p);
 
                 createConfetti();
+
+                // Add Arabic Verses
+                const versesContainer = document.createElement('div');
+                versesContainer.className = 'verses-container';
+
+                // Right Side Verses
+                const rightVerses = document.createElement('div');
+                rightVerses.className = 'verse-box verses-right';
+                const rightLine1 = document.createElement('div');
+                rightLine1.className = 'verse-line';
+                rightLine1.textContent = 'لو مالَ قلبي عن هواك نزعتهُ';
+                const rightLine2 = document.createElement('div');
+                rightLine2.className = 'verse-line';
+                rightLine2.textContent = 'وشريتُ قلباً في هواك يذوبُ';
+                rightVerses.appendChild(rightLine1);
+                rightVerses.appendChild(rightLine2);
+
+                // Left Side Verses
+                const leftVerses = document.createElement('div');
+                leftVerses.className = 'verse-box verses-left';
+                const leftLine1 = document.createElement('div');
+                leftLine1.className = 'verse-line';
+                leftLine1.textContent = 'آياتُ حبُّكَ في فؤادي أُحكمت';
+                const leftLine2 = document.createElement('div');
+                leftLine2.className = 'verse-line';
+                leftLine2.textContent = 'من قال أنِّي عن هواكَ أتوبُ؟';
+                leftVerses.appendChild(leftLine1);
+                leftVerses.appendChild(leftLine2);
+
+                // Append to container (Right first because usually flex row is LTR, but user asked for "Right text which is X". 
+                // Detailed: User said "first text will be on the right ... second text will be on the left".
+                // In standard Flex LTR: First child is Left, Second is Right.
+                // So I should append Left then Right if I want visual L-R.
+                // BUT User said: "first text ... on the right ... second text ... on the left".
+                // Use order or just append appropriately. 
+                // If I append LeftVerses then RightVerses, Left is on Left. 
+                // I will append LeftVerses first (Left text) then RightVerses (Right text).
+
+                versesContainer.appendChild(leftVerses);
+                versesContainer.appendChild(rightVerses);
+
+                wrapper.appendChild(versesContainer);
             } else {
                 const h1 = document.createElement('h1');
                 h1.textContent = step.text;
@@ -147,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (kittyImg && step.image) {
                     // ----------- تصحيح المسار هنا -----------
                     kittyImg.src = `images/${step.image}`;
-                    
+
                     // Wait a tiny bit or for load to fade back in
                     kittyImg.onload = () => {
                         kittyImg.classList.remove('fade-out');
