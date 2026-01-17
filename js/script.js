@@ -103,20 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 leftVerses.appendChild(leftLine1);
                 leftVerses.appendChild(leftLine2);
 
-                // Append to container (Right first because usually flex row is LTR, but user asked for "Right text which is X". 
-                // Detailed: User said "first text will be on the right ... second text will be on the left".
-                // In standard Flex LTR: First child is Left, Second is Right.
-                // So I should append Left then Right if I want visual L-R.
-                // BUT User said: "first text ... on the right ... second text ... on the left".
-                // Use order or just append appropriately. 
-                // If I append LeftVerses then RightVerses, Left is on Left. 
-                // I will append LeftVerses first (Left text) then RightVerses (Right text).
-
-                versesContainer.appendChild(leftVerses);
-                versesContainer.appendChild(rightVerses);
-
                 // Append to main-container instead of wrapper to avoid being trapped in wrapper's transform context
                 // This ensures "top: 50%" is relative to the whole screen/container, not just the text block below the image.
+                versesContainer.appendChild(leftVerses);
+                versesContainer.appendChild(rightVerses);
                 document.querySelector('.main-container').appendChild(versesContainer);
             } else {
                 const h1 = document.createElement('h1');
@@ -151,68 +141,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 wrapper.appendChild(btnContainer);
             }
-        }
-        return wrapper;
-    };
+            return wrapper;
+        };
 
-    // Cleanup any existing verses from previous render (if any)
-    const existingVerses = document.querySelector('.verses-container');
-    if (existingVerses) existingVerses.remove();
+        // Cleanup any existing verses from previous render (if any)
+        const existingVerses = document.querySelector('.verses-container');
+        if (existingVerses) existingVerses.remove();
 
-    if (contentArea.children.length === 0) {
-        // Update image
-        const kittyImg = document.querySelector('.kitty-img');
-        if (kittyImg && step.image) {
-            // ----------- تصحيح المسار هنا -----------
-            kittyImg.src = `images/${step.image}`;
-        }
-
-        // First load
-        const newContent = createNewContent();
-        contentArea.appendChild(newContent);
-        // Force reflow
-        void newContent.offsetWidth;
-        newContent.classList.add('fade-enter-active');
-        newContent.classList.remove('fade-enter');
-    } else {
-        // Transition
-        const currentContent = contentArea.firstElementChild;
-        const kittyImg = document.querySelector('.kitty-img');
-
-        // Start exit animations
-        currentContent.classList.add('fade-exit');
-        void currentContent.offsetWidth; // Force reflow
-        currentContent.classList.add('fade-exit-active');
-        currentContent.classList.remove('fade-exit');
-
-        if (kittyImg) {
-            kittyImg.classList.add('fade-out');
-        }
-
-        currentContent.addEventListener('transitionend', () => {
-            currentContent.remove();
-
-            // Update image source and fade in
+        if (contentArea.children.length === 0) {
+            // Update image
+            const kittyImg = document.querySelector('.kitty-img');
             if (kittyImg && step.image) {
                 // ----------- تصحيح المسار هنا -----------
                 kittyImg.src = `images/${step.image}`;
-
-                // Wait a tiny bit or for load to fade back in
-                kittyImg.onload = () => {
-                    kittyImg.classList.remove('fade-out');
-                };
-                // Safety timeout in case onload doesn't fire (cached)
-                setTimeout(() => kittyImg.classList.remove('fade-out'), 100);
             }
 
+            // First load
             const newContent = createNewContent();
             contentArea.appendChild(newContent);
-            void newContent.offsetWidth; // Force reflow
+            // Force reflow
+            void newContent.offsetWidth;
             newContent.classList.add('fade-enter-active');
             newContent.classList.remove('fade-enter');
-        }, { once: true });
+        } else {
+            // Transition
+            const currentContent = contentArea.firstElementChild;
+            const kittyImg = document.querySelector('.kitty-img');
+
+            // Start exit animations
+            currentContent.classList.add('fade-exit');
+            void currentContent.offsetWidth; // Force reflow
+            currentContent.classList.add('fade-exit-active');
+            currentContent.classList.remove('fade-exit');
+
+            if (kittyImg) {
+                kittyImg.classList.add('fade-out');
+            }
+
+            currentContent.addEventListener('transitionend', () => {
+                currentContent.remove();
+
+                // Update image source and fade in
+                if (kittyImg && step.image) {
+                    // ----------- تصحيح المسار هنا -----------
+                    kittyImg.src = `images/${step.image}`;
+
+                    // Wait a tiny bit or for load to fade back in
+                    kittyImg.onload = () => {
+                        kittyImg.classList.remove('fade-out');
+                    };
+                    // Safety timeout in case onload doesn't fire (cached)
+                    setTimeout(() => kittyImg.classList.remove('fade-out'), 100);
+                }
+
+                const newContent = createNewContent();
+                contentArea.appendChild(newContent);
+                void newContent.offsetWidth; // Force reflow
+                newContent.classList.add('fade-enter-active');
+                newContent.classList.remove('fade-enter');
+            }, { once: true });
+        }
     }
-}
 
     function handleReject() {
         noClickCount++;
@@ -288,9 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start
     const kittyImg = document.querySelector('.kitty-img');
-if (kittyImg && steps[0].image) {
-    // ----------- تصحيح المسار هنا أيضاً -----------
-    kittyImg.src = `images/${steps[0].image}`;
-}
-renderStep(0);
+    if (kittyImg && steps[0].image) {
+        // ----------- تصحيح المسار هنا أيضاً -----------
+        kittyImg.src = `images/${steps[0].image}`;
+    }
+    renderStep(0);
 });
