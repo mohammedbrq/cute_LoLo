@@ -104,10 +104,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 leftVerses.appendChild(leftLine2);
 
                 // Append to main-container instead of wrapper to avoid being trapped in wrapper's transform context
-                // This ensures "top: 50%" is relative to the whole screen/container, not just the text block below the image.
                 versesContainer.appendChild(leftVerses);
                 versesContainer.appendChild(rightVerses);
                 document.querySelector('.main-container').appendChild(versesContainer);
+
+                // Animate them
+                // We use the same classes as the main content for consistency
+                [leftVerses, rightVerses].forEach(el => {
+                    el.classList.add('fade-enter');
+                });
+
+                // Force reflow
+                void versesContainer.offsetWidth;
+
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    [leftVerses, rightVerses].forEach(el => {
+                        el.classList.add('fade-enter-active');
+                        el.classList.remove('fade-enter');
+                    });
+                });
             } else {
                 const h1 = document.createElement('h1');
                 h1.textContent = step.text;
