@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 rightLine1.textContent = '‏النُّورُ أنتِ، وغَيرُكِ الظَّلْماءُ';
                 const rightLine2 = document.createElement('div');
                 rightLine2.className = 'verse-line';
-                rightLine2.textContent = '‏فتَبَسَّمي كي تُشرِقَ الأضواءُ';
+                rightLine2.textContent = '‏‏يا آيةً في الحُسْنِ ليس كمثلِها';
                 rightVerses.appendChild(rightLine1);
                 rightVerses.appendChild(rightLine2);
 
@@ -96,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 leftVerses.className = 'verse-box verses-left';
                 const leftLine1 = document.createElement('div');
                 leftLine1.className = 'verse-line';
-                leftLine1.textContent = '‏يا آيةً في الحُسْنِ ليس كمثلِها';
+                leftLine1.textContent = '‏فتَبَسَّمي كي تُشرِقَ الأضواءُ
+';
                 const leftLine2 = document.createElement('div');
                 leftLine2.className = 'verse-line';
                 leftLine2.textContent = 'خُلُقًا وخَلْقًا في النِّساء حَسناءُ';
@@ -299,4 +300,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderStep(0);
 });
+
 
