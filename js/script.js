@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             type: 'winner',
             text: 'YAY!!! You are the winner of Mohammed\'s heart! 💖🎉',
-            subtext: '(Here is your virtual prize: 🎁🍰flowers💐)',
             image: 'hk_celebrate.png',
             buttons: [] // No buttons
         }
@@ -299,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderStep(0);
 });
+
 
 
 
